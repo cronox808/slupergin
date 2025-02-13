@@ -1,16 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
+    const gameCanvas = document.getElementById("gameCanvas");
+    const ctx = gameCanvas.getContext("2d");
 
-    if (startButton) {
-        startButton.addEventListener("click", function () {
-            console.log("El juego ha comenzado"); // Para verificar en la consola
-            iniciarJuego(); // Asegúrate de que esta función existe
-        });
-    } else {
-        console.error("Botón no encontrado");
+    gameCanvas.width = 800;
+    gameCanvas.height = 600;
+
+    let player = { x: 400, y: 300, size: 20 };
+
+    function iniciarJuego() {
+        startButton.style.display = "none"; // Oculta el botón
+        gameLoop();
     }
-});
 
+    function gameLoop() {
+        ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+        ctx.fillStyle = "blue";
+        ctx.fillRect(player.x, player.y, player.size, player.size);
+        requestAnimationFrame(gameLoop);
+    }
+
+    startButton.addEventListener("click", iniciarJuego);
+});
 function iniciarJuego() {
     alert("¡El juego ha comenzado!"); // Reemplaza con la lógica de inicio del juego
 }
