@@ -12,6 +12,7 @@
 
 body {
     display: flex;
+    padding: 0;
     flex-direction: column; /* Para apilar el contenido de arriba hacia abajo */
     justify-content: center;
     align-items: center; /* Centra todo en el eje horizontal */
@@ -22,7 +23,7 @@ body {
     display: flex;
     justify-content: center; /* Esto mantiene el contenido centrado horizontalmente */
     align-items: flex-start; /* Esto mueve el contenido hacia la parte superior */
-    height: 10vh;
+    height: 15vh;
     margin: 0; /* Para eliminar cualquier margen por defecto */
     overflow: visible;
 }
@@ -35,6 +36,7 @@ h1 span {
     display: inline-block;
     text-shadow: 0 1px 0 #ff0000, 0 2px 0 #ff0000, 0 3px 0 #ff0000, 0 4px 0 #ff0000, 0 5px 0 #ff0000, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 0 rgb(255, 0, 0);
     animation: bounce 0.6s ease infinite alternate;
+    z-index: 1;
 }
 h1 span:nth-child(1) {
     animation-delay: 0s;
@@ -95,4 +97,19 @@ h1 span:nth-child(9) {
     background-color: rgb(255, 0, 0);
     color:#000000;
     box-shadow: 0 0 10px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0), 0 0 30px rgb(255, 0, 0), 0 0 40px rgb(255, 0, 0);
+}
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    h1 span {
+        font-size: 3rem; /* Reducir tamaño de fuente en pantallas pequeñas */
+    }
+
+    #startButton {
+        padding: 10px 20px;
+        font-size: 16px; /* Reducir tamaño de fuente del botón */
+        margin-top: 20px;
+    }
+    .titulo {
+        height: 20vh; /* Ajustar la altura del título */
+    }
 }
