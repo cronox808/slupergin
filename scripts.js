@@ -38,7 +38,7 @@ let player, cursors, bullets, attackKey;
 
 function preload() {
     this.load.image("player", "player.png"); // Imagen del personaje
-    this.load.image("bullet", "bullet.png"); // Imagen de disparo
+    this.load.image("bullet", "bullet.gif"); // Imagen de disparo
 }
 
 function create() {
