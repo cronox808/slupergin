@@ -1,5 +1,7 @@
 let game;
 let player, cursors, bullets, attackKey;
+let isShooting = false; // Variable para controlar si se está disparando
+let shootInterval;
 
 document.getElementById("startButton").addEventListener("click", function() {
     const config = {
@@ -22,7 +24,7 @@ document.getElementById("startButton").addEventListener("click", function() {
 
 function preload() {
     this.load.image("player", "player.png");
-    this.load.image("bullet", "bullet.gif");
+    this.load.image("bullet", "bullet.png");
 }
 
 function create() {
@@ -34,9 +36,28 @@ function create() {
     cursors = this.input.keyboard.createCursorKeys();
     attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-    // Ocultar el botón de inicio al comenzar el juego
+    // Aquí se oculta el botón de inicio al comenzar el juego
     const startButton = document.getElementById("startButton");
     startButton.style.display = "none";
+
+    // Evento para disparar al hacer clic con el botón izquierdo del mouse
+    this.input.on('pointerdown', function (pointer) {
+        if (pointer.leftButtonDown()) {
+            shootBullet(this); // Disparo inmediato con un solo clic
+            isShooting = true;
+            shootInterval = setInterval(() => {
+                if (isShooting) shootBullet(this);
+            }, 100); // Intervalo de 500 ms entre disparos
+        }
+    }, this);
+
+    // Evento para detener el disparo al soltar el botón izquierdo del mouse
+    this.input.on('pointerup', function (pointer) {
+        if (!pointer.leftButtonDown()) {
+            isShooting = false;
+            clearInterval(shootInterval); // Detener el intervalo de disparo
+        }
+    }, this);
 }
 
 function update() {
