@@ -1,18 +1,24 @@
-
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    physics: {
-        default: "arcade",
-        arcade: { gravity: { y: 0 } }
-    },
-    scene: { preload, create, update }
-};
-
-const game = new Phaser.Game(config);
-
+let game;
 let player, cursors, bullets, attackKey;
+
+document.getElementById("startButton").addEventListener("click", function() {
+    const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: {
+            default: "arcade",
+            arcade: { gravity: { y: 0 } }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    game = new Phaser.Game(config);
+});
 
 function preload() {
     this.load.image("player", "player.png");
@@ -28,15 +34,29 @@ function create() {
     cursors = this.input.keyboard.createCursorKeys();
     attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-    this.input.keyboard.on("keydown-W", () => shootBullet(this));
+    // Ocultar el botón de inicio al comenzar el juego
+    const startButton = document.getElementById("startButton");
+    startButton.style.display = "none";
 }
 
 function update() {
     player.setVelocity(0);
-    if (cursors.left.isDown) player.setVelocityX(-200);
-    if (cursors.right.isDown) player.setVelocityX(200);
-    if (cursors.up.isDown) player.setVelocityY(-200);
-    if (cursors.down.isDown) player.setVelocityY(200);
+
+    if (cursors.left.isDown) {
+        player.setVelocityX(-200);
+    } else if (cursors.right.isDown) {
+        player.setVelocityX(200);
+    }
+
+    if (cursors.up.isDown) {
+        player.setVelocityY(-200);
+    } else if (cursors.down.isDown) {
+        player.setVelocityY(200);
+    }
+
+    if (Phaser.Input.Keyboard.JustDown(attackKey)) {
+        shootBullet(this);
+    }
 }
 
 function shootBullet(scene) {
