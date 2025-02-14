@@ -1,5 +1,22 @@
-body{
-    background: #000000;
+/* Estilo para asegurarnos de que el video ocupe toda la pantalla */
+#videoBackground {
+    position: fixed; /* Fija el video en el fondo */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    object-fit: cover; /* Cubre toda la pantalla sin distorsionar el video */
+    z-index: -1; /* Asegura que el video esté detrás de todo el contenido */
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Para apilar el contenido de arriba hacia abajo */
+    justify-content: center;
+    align-items: center; /* Centra todo en el eje horizontal */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    margin: 0; /* Elimina el margen predeterminado */
 }
 .titulo{
     display: flex;
@@ -57,22 +74,25 @@ h1 span:nth-child(9) {
     }
 }
 
-.starButton{
-    background-color: #111;
-    border: 2px solid #00f;
-    color: #00f;
-    padding: 10px 20px;
+#startButton{
+    
+    background-color: #000000;
+    border: 2px solid rgb(255, 0, 0);
+    color: rgb(255, 0, 0);
+    padding: 15px 30px;
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     outline: none;
+    border-radius: 25px;
     transition: all 0.3s ease;
-    box-shadow: 0 0 5px #00f, 0 0 10px #00f, 0 0 15px #00f, 0 0 20px #00f;
+    box-shadow: 0 0 5px rgb(255, 0, 0), 0 0 10px rgb(255, 0, 0), 0 0 15px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0);
+    margin-top:37.8px;
 }
 
-.starButton{
-    background-color: #00f;
-    color:#fff;
-    box-shadow: 0 0 10px #00f, 0 0 20px #00f, 0 0 30px #00f, 0 0 40px #00f;
+#startButton:hover{
+    background-color: rgb(255, 0, 0);
+    color:#000000;
+    box-shadow: 0 0 10px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0), 0 0 30px rgb(255, 0, 0), 0 0 40px rgb(255, 0, 0);
 }
